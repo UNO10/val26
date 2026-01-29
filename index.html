@@ -127,6 +127,39 @@
     <source src="I Think They Call This Love (Cover) - Matthew Ifield.mp3" type="audio/mpeg">
 </audio>
 
+    <script>
+/** * 2. The Logic to handle "Autoplay" restrictions 
+ * and the "Press to Stop" functionality.
+ */
+const bgm = document.getElementById('bgm');
+const musicBtn = document.getElementById('music-control');
+
+// Set initial button state to "Playing"
+musicBtn.innerText = "⏸️"; 
+
+// Browser Autoplay Fix: Start music on the first user interaction
+window.addEventListener('keydown', () => {
+    if (bgm.paused && musicBtn.innerText === "⏸️") {
+        bgm.play().catch(e => console.log("Autoplay blocked until interaction."));
+    }
+}, { once: true });
+
+window.addEventListener('click', () => {
+    if (bgm.paused && musicBtn.innerText === "⏸️") {
+        bgm.play().catch(e => console.log("Autoplay blocked until interaction."));
+    }
+}, { once: true });
+
+function toggleMusic() {
+    if (bgm.paused) {
+        bgm.play();
+        musicBtn.innerText = "⏸️";
+    } else {
+        bgm.pause();
+        musicBtn.innerText = "🎵";
+    }
+}
+</script>
 <canvas id="game"></canvas>
 
 <script>
@@ -343,6 +376,7 @@ draw();
 </script>
 </body>
 </html>
+
 
 
 
